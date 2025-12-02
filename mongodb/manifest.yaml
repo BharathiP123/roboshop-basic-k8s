@@ -1,0 +1,26 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+##this is for the replicaset
+ name: mongodb
+ namespace: roboshop
+ labels: 
+  name: mongodb
+  project: roboshop
+  tier: db
+  componet: mongodb
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      tier: mongodb-dev
+  ##pod configuration
+  template:
+    metadata:
+      name: pod-replica-set
+      labels:
+        tier: mongodb-dev
+    spec:
+      containers:
+       - name: mongodb
+         image: bharathipotla/mongodb
