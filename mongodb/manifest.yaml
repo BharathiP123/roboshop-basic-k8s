@@ -23,4 +23,4 @@ spec:
     spec:
       containers:
        - name: mongodb
-         image: bharathipotla/mongodb
+         image: bharathipotla/mongodb:v1
