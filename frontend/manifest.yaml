@@ -75,7 +75,7 @@ metadata:
  name: frontend
  namespace: roboshop
  labels: 
-  name: frontend
+  
   project: roboshop
   tier: backend
   componet: frontend
