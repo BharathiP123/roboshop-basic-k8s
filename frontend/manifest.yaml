@@ -93,12 +93,12 @@ spec:
         tier: frontend-dev
     spec:
       volumes:
-      - name: nginx-config
-        configMap:
-          name: frontend
+        - name: nginx-config
+          configMap:
+            name: frontend
       containers:
        - name: frontend
-         image: bharathipotla/frontend:v1
+         image: bharathipotla/frontend:latest
          imagePullPolicy: Always
          readinessProbe:
             httpGet:
@@ -113,9 +113,9 @@ spec:
           failureThreshold: 20
           periodSeconds: 50
          volumeMounts:
-          - name: nginx-config
-            mountPath: /etc/nginx/nginx.conf
-            subPath: nginx.conf
+            - name: nginx-config
+              mountPath: /etc/nginx/nginx.conf
+              subPath: nginx.conf
 
 ---
 apiVersion: v1
