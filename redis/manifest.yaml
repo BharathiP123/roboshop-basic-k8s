@@ -2,51 +2,52 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
 ##this is for the replicaset
- name: mongodb
+ name: redis
  namespace: roboshop
  labels: 
-  name: mongodb
+  name: redis
   project: roboshop
   tier: db
-  componet: mongodb
+  componet: redis
 spec:
   replicas: 1
   selector:
     matchLabels:
-      tier: mongodb-dev
+      tier: redis-dev
   ##pod configuration
   template:
     metadata:
       name: pod-replica-set
       labels:
-        tier: mongodb-dev
+        tier: redis-dev
     spec:
       containers:
-       - name: mongodb
+       - name: redis
          imagePullPolicy: Always
-         image: bharathipotla/mongodb:v1
+         image: redis:7.0
          readinessProbe:
           tcpSocket:
-            port: 27017
+            port: 6379
           initialDelaySeconds: 10
           periodSeconds: 10
          livenessProbe:
           tcpSocket:
-            port: 27017
+            port: 6379
           initialDelaySeconds: 5
           periodSeconds: 5
 
 ---
 kind: Service
 metadata:
- name: mongodb-service
+ name: redis-service
  namespace: roboshop
 spec:
  selector:
    project: roboshop
-   component: mongodb
+   component: redis
    tier: db
+   
  ports:
    - protocol: TCP
-     port: 27017 ##service port
-     targetPort: 27017 ##This is container port
+     port: 6379 ##service port
+     targetPort: 6379 ##This is container port

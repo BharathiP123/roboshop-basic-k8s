@@ -1,0 +1,73 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: payment
+  namespace: roboshop
+data:
+  data:
+  CART_HOST: "cart"
+  CART_PORT: "8080"
+  USER_HOST: "user"
+  USER_PORT: "8080"
+  AMQP_HOST: "rabbitmq"
+  AMQP_USER: "roboshop"
+  AMQP_PASS: "roboshop123"
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+##this is for the replicaset
+ name: payment
+ namespace: roboshop
+ labels: 
+  name: payment
+  project: roboshop
+  tier: backend
+  componet: payment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      tier: payment-dev
+  ##pod configuration
+  template:
+    metadata:
+      name: pod-replica-set
+      labels:
+        tier: payment-dev
+    spec:
+      containers:
+       - name: payment
+         image: bharathipotla/payment:v1
+         imagePullPolicy: Always
+         envFrom:
+          - configMapRef:
+              name: payment
+         readinessProbe:
+            httpGet:
+              path: /health
+              port: 8080
+            failureThreshold: 20
+            periodSeconds: 50
+         livenessProbe:
+          httpGet:
+            path: /health
+            port: 8080
+          failureThreshold: 20
+          periodSeconds: 50
+
+---
+kind: Service
+metadata:
+ name: payment-service
+ namespace: roboshop
+spec:
+ selector:
+   project: roboshop
+   component: payment
+   tier: backend
+   
+ ports:
+   - protocol: TCP
+     port: 8080 ##service port
+     targetPort: 8080 ##This is container port

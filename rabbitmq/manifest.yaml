@@ -2,51 +2,57 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
 ##this is for the replicaset
- name: mongodb
+ name: rabbitmq
  namespace: roboshop
  labels: 
-  name: mongodb
+  name: rabbitmq
   project: roboshop
   tier: db
-  componet: mongodb
+  componet: rabbitmq
 spec:
   replicas: 1
   selector:
     matchLabels:
-      tier: mongodb-dev
+      tier: rabbitmq-dev
   ##pod configuration
   template:
     metadata:
       name: pod-replica-set
       labels:
-        tier: mongodb-dev
+        tier: rabbitmq-dev
     spec:
       containers:
-       - name: mongodb
+       - name: rabbitmq
          imagePullPolicy: Always
-         image: bharathipotla/mongodb:v1
+         image: rabbitmq:3
+         env:
+          - name: RABBITMQ_DEFAULT_USER
+            value: roboshop
+          - name: RABBITMQ_DEFAULT_PASS
+            value: roboshop123 
          readinessProbe:
           tcpSocket:
-            port: 27017
+            port: 5672
           initialDelaySeconds: 10
           periodSeconds: 10
          livenessProbe:
           tcpSocket:
-            port: 27017
+            port: 5672
           initialDelaySeconds: 5
           periodSeconds: 5
 
 ---
 kind: Service
 metadata:
- name: mongodb-service
+ name: rabbitmq-service
  namespace: roboshop
 spec:
  selector:
    project: roboshop
-   component: mongodb
    tier: db
+   component: rabbitmq
+   
  ports:
    - protocol: TCP
-     port: 27017 ##service port
-     targetPort: 27017 ##This is container port
+     port: 5672 ##service port
+     targetPort: 5672 ##This is container port
