@@ -118,6 +118,7 @@ spec:
             subPath: nginx.conf
 
 ---
+apiVersion: v1
 kind: Service
 metadata:
  name: frontend-service
