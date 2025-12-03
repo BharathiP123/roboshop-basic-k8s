@@ -4,7 +4,6 @@ metadata:
   name: frontend
   namespace: roboshop
 data:
-  data:
   nginx.conf: |
     user nginx;
     worker_processes auto;
