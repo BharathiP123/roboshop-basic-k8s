@@ -91,7 +91,9 @@ spec:
     metadata:
       name: pod-replica-set
       labels:
-        tier: frontend-dev
+        project: roboshop
+        component: frontend
+        tier: backend
     spec:
       volumes:
         - name: nginx-config
