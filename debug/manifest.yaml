@@ -1,0 +1,9 @@
+apiVersion: v1
+kind: Pod
+metadata:
+ name: pod-debug
+ namespace: roboshop
+spec: 
+  containers:
+    - name: debug
+      image: bharathipotla/debug:v1
