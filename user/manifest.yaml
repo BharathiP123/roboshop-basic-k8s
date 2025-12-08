@@ -15,21 +15,24 @@ metadata:
  name: user
  namespace: roboshop
  labels:
-  name: user
-  project: roboshop
-  tier: backend
-  componet: user
+    project: roboshop
+    component: user
+    tier: backend
 spec:
   replicas: 1
   selector:
     matchLabels:
-      tier: user-dev
+      project: roboshop
+      component: user
+      tier: backend
   ##pod configuration
   template:
     metadata:
       name: pod-replica-set
       labels:
-        tier: user-dev
+        project: roboshop
+        component: user
+        tier: backend
     spec:
       containers:
        - name: user
