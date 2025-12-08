@@ -15,21 +15,24 @@ metadata:
  name: cart
  namespace: roboshop
  labels: 
-  name: cart
-  project: roboshop
-  tier: backend
-  componet: cart
+    project: roboshop
+    component: user
+    tier: backend
 spec:
   replicas: 1
   selector:
     matchLabels:
-      tier: cart-dev
+      project: roboshop
+      component: user
+      tier: backend
   ##pod configuration
   template:
     metadata:
       name: pod-replica-set
       labels:
-        tier: cart-dev
+        project: roboshop
+        component: user
+        tier: backend
     spec:
       containers:
        - name: cart
