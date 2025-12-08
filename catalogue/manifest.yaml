@@ -28,7 +28,9 @@ spec:
     metadata:
       name: pod-replica-set
       labels:
-        tier: catalogue-dev
+        project: roboshop
+        tier: backend
+        componet: catalogue
     spec:
       containers:
        - name: catalogue
@@ -58,9 +60,9 @@ metadata:
  namespace: roboshop
 spec:
  selector:
-   project: roboshop
-   component: catalogue
-   tier: backend
+    project: roboshop
+    tier: backend
+    componet: catalogue
    
  ports:
    - protocol: TCP
