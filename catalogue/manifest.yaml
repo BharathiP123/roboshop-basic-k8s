@@ -14,7 +14,6 @@ metadata:
  name: catalogue
  namespace: roboshop
  labels: 
-  name: catalogue
   project: roboshop
   tier: backend
   componet: catalogue
