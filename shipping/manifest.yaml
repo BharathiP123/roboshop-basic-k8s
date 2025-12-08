@@ -14,26 +14,32 @@ metadata:
  name: shipping
  namespace: roboshop
  labels: 
-  name: shipping
-  project: roboshop
-  environment: dev
-  component: shipping
-  tier: backend
+    project: roboshop
+    component: shipping
+    tier: backend
 spec:
   replicas: 1
   selector:
     matchLabels:
-      tier: shipping-dev
+      project: roboshop
+      component: shipping
+      tier: backend
   ##pod configuration
   template:
     metadata:
       name: pod-replica-set
       labels:
-        tier: shipping-dev
+        project: roboshop
+        component: shipping
+        tier: backend
     spec:
       containers:
        - name: shipping
          image: bharathipotla/shipping:v1
+         envFrom:
+          configMapRef:
+           - name: shipping
+         imagePullPolicy: Always
          readinessProbe:
             httpGet:
               path: /health
