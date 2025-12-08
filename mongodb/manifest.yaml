@@ -42,7 +42,8 @@ spec:
 ---
 apiVersion: v1
 kind: Service
-metadata:
+metadata: 
+ name: mongodb
  namespace: roboshop
 spec:
  selector:
