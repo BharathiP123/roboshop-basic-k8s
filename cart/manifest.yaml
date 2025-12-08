@@ -16,7 +16,7 @@ metadata:
  namespace: roboshop
  labels: 
     project: roboshop
-    component: user
+    component: cart
     tier: backend
 spec:
   replicas: 1
@@ -31,7 +31,7 @@ spec:
       name: pod-replica-set
       labels:
         project: roboshop
-        component: user
+        component: cart
         tier: backend
     spec:
       containers:
