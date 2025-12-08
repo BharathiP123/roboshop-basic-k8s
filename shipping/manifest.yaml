@@ -37,8 +37,8 @@ spec:
        - name: shipping
          image: bharathipotla/shipping:v1
          envFrom:
-          configMapRef:
-           - name: shipping
+          - configMapRef:
+             name: shipping
          imagePullPolicy: Always
          readinessProbe:
             httpGet:
