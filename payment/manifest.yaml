@@ -20,21 +20,24 @@ metadata:
  name: payment
  namespace: roboshop
  labels: 
-  name: payment
-  project: roboshop
-  tier: backend
-  componet: payment
+   project: roboshop
+   component: payment
+   tier: backend
 spec:
   replicas: 1
   selector:
     matchLabels:
-      tier: payment-dev
+      project: roboshop
+      component: payment
+      tier: backend
   ##pod configuration
   template:
     metadata:
       name: pod-replica-set
       labels:
-        tier: payment-dev
+        project: roboshop
+        component: payment
+        tier: backend
     spec:
       containers:
        - name: payment
