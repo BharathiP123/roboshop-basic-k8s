@@ -11,9 +11,9 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
 ##this is for the replicaset
- name: shipping
- namespace: roboshop
- labels: 
+  name: shipping
+  namespace: roboshop
+  labels: 
     project: roboshop
     component: shipping
     tier: backend
