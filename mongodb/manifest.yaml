@@ -5,7 +5,6 @@ metadata:
  name: mongodb
  namespace: roboshop
  labels: 
-  name: mongodb
   project: roboshop
   tier: db
   componet: mongodb
@@ -13,13 +12,17 @@ spec:
   replicas: 1
   selector:
     matchLabels:
-      tier: mongodb-dev
+      project: roboshop
+      tier: db
+      componet: mongodb
   ##pod configuration
   template:
     metadata:
       name: pod-replica-set
       labels:
-        tier: mongodb-dev
+        project: roboshop
+        tier: db
+        componet: mongodb
     spec:
       containers:
        - name: mongodb
@@ -40,7 +43,6 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
- name: mongodb
  namespace: roboshop
 spec:
  selector:
