@@ -13,9 +13,9 @@ spec:
   replicas: 1
   selector:
     matchLabels:
-    project: roboshop
-    component: frontend
-    tier: backend
+      project: roboshop
+      component: frontend
+      tier: backend
   ##pod configuration
   template:
     metadata:
@@ -25,30 +25,24 @@ spec:
         component: frontend
         tier: backend
     spec:
-      volumes:
-        - name: nginx-config
-          configMap:
-            name: frontend
+
       containers:
        - name: frontend
-         image: bharathipotla/frontend:latest
+         image: bharathipotla/frontend:v1
          imagePullPolicy: Always
          readinessProbe:
             httpGet:
-              path: /health
+              path: /
               port: 80
             failureThreshold: 20
             periodSeconds: 50
          livenessProbe:
           httpGet:
-            path: /health
+            path: /
             port: 80
           failureThreshold: 20
           periodSeconds: 50
-         volumeMounts:
-            - name: nginx-config
-              mountPath: /etc/nginx/nginx.conf
-              subPath: nginx.conf
+
 
 ---
 apiVersion: v1
