@@ -13,13 +13,17 @@ spec:
   replicas: 1
   selector:
     matchLabels:
-      tier: redis-dev
+      project: roboshop
+      component: redis
+      tier: db
   ##pod configuration
   template:
     metadata:
       name: pod-replica-set
       labels:
-        tier: redis-dev
+        project: roboshop
+        component: redis
+        tier: db
     spec:
       containers:
        - name: redis
@@ -40,7 +44,7 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
- name: redis-service
+ name: redis
  namespace: roboshop
 spec:
  selector:
