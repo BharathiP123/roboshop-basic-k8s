@@ -5,21 +5,24 @@ metadata:
  name: rabbitmq
  namespace: roboshop
  labels: 
-  name: rabbitmq
-  project: roboshop
-  tier: db
-  componet: rabbitmq
+   project: roboshop
+   tier: db
+   component: rabbitmq
 spec:
   replicas: 1
   selector:
     matchLabels:
-      tier: rabbitmq-dev
+      project: roboshop
+      tier: db
+      component: rabbitmq
   ##pod configuration
   template:
     metadata:
       name: pod-replica-set
       labels:
-        tier: rabbitmq-dev
+          project: roboshop
+          tier: db
+          component: rabbitmq
     spec:
       containers:
        - name: rabbitmq
