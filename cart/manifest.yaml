@@ -23,7 +23,7 @@ spec:
   selector:
     matchLabels:
       project: roboshop
-      component: user
+      component: cart
       tier: backend
   ##pod configuration
   template:
