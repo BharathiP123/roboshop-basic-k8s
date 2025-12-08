@@ -22,7 +22,9 @@ spec:
   replicas: 1
   selector:
     matchLabels:
-      tier: catalogue-dev
+        project: roboshop
+        tier: backend
+        componet: catalogue
   ##pod configuration
   template:
     metadata:
